@@ -1,10 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Your page's title goes here</title>
-    </head>
-    <body>
-        <h1>This is a heading</h1>
-        <p>And this is a paragraph.</p>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard Coupon Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Copy Your Coupon Code</h1>
+    <input type="hidden" id="couponCode" value=""> <button id="copyButton" onclick="copyCode()">Copy Code</button>
+    <p id="message"></p>
+    <script> document.addEventListener("DOMContentLoaded", function () {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById("couponCode").value = text || "DEFAULTCODE123";
+            }).catch(err => {
+                console.error("Failed to read clipboard: ", err);
+                document.getElementById("couponCode").value = "DEFAULTCODE123";
+            });
+        }); function copyCode() {
+            const couponCode = document.getElementById("couponCode").value;
+            navigator.clipboard.writeText(couponCode).then(() => {
+                document.getElementById("message").textContent = "Coupon code copied to clipboard!";
+                document.getElementById("copyButton").textContent = "Code Copied!";
+                setTimeout(() => {
+                    document.getElementById("copyButton").textContent = "Copy Code";
+                    document.getElementById("message").textContent = "";
+                }, 2000);
+            }).catch(err => { document.getElementById("message").textContent = "Failed to copy the coupon code."; });
+        } </script>
+</body>
+
 </html>
