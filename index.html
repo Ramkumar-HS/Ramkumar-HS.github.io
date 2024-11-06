@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clipboard Coupon Code</title>
+    <title>Coupon Code Clipboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,17 +25,37 @@
 </head>
 
 <body>
-    <h1>Copy Your Coupon Code</h1>
-    <input type="hidden" id="couponCode" value=""> <button id="copyButton" onclick="copyCode()">Copy Code</button>
+    <h1>Coupon Code Clipboard</h1>
+    <input type="hidden" id="couponCode" value="">
+    <button id="loadButton" onclick="loadCouponCode()">Load Coupon Code</button> <button id="copyButton"
+        onclick="copyCode()" style="display: none;">Copy Code</button>
     <p id="message"></p>
-    <script> document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadButton = document.getElementById("loadButton");
+            loadButton.click();
             navigator.clipboard.readText().then(text => {
                 document.getElementById("couponCode").value = text || "DEFAULTCODE123";
+                document.getElementById("message").textContent = "Coupon code loaded!";
+                document.getElementById("copyButton").style.display = "inline-block";
             }).catch(err => {
-                console.error("Failed to read clipboard: ", err);
-                document.getElementById("couponCode").value = "DEFAULTCODE123";
+                document.getElementById("message").textContent = "Clipboard access restricted. Please click 'Load Coupon Code'.";
+                document.getElementById("loadButton").style.display = "inline-block";
             });
-        }); function copyCode() {
+        });
+
+        function loadCouponCode() {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById("couponCode").value = text || "DEFAULTCODE123";
+                document.getElementById("message").textContent = "Coupon code loaded!";
+                document.getElementById("loadButton").style.display = "none";
+                document.getElementById("copyButton").style.display = "inline-block";
+            }).catch(err => {
+                document.getElementById("message").textContent = "Could not access clipboard.";
+            });
+        }
+
+        function copyCode() {
             const couponCode = document.getElementById("couponCode").value;
             navigator.clipboard.writeText(couponCode).then(() => {
                 document.getElementById("message").textContent = "Coupon code copied to clipboard!";
@@ -44,8 +64,11 @@
                     document.getElementById("copyButton").textContent = "Copy Code";
                     document.getElementById("message").textContent = "";
                 }, 2000);
-            }).catch(err => { document.getElementById("message").textContent = "Failed to copy the coupon code."; });
-        } </script>
+            }).catch(err => {
+                document.getElementById("message").textContent = "Failed to copy the coupon code.";
+            });
+        }
+    </script>
 </body>
 
 </html>
