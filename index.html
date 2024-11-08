@@ -61,7 +61,8 @@
                         copyCode()
                     }
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.log("Clipboard error line 65 -", err)
                     document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
                     document.getElementById("copiedMessage").style.display = "block";
                 });
@@ -75,7 +76,8 @@
                     document.getElementById("copyButton").style.display = "none";
                     document.getElementById("copiedMessage").style.display = "block";
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.log("Clipboard error line 80 -", err)
                     document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
                     document.getElementById("copiedMessage").style.display = "block";
                 });
