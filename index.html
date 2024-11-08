@@ -44,7 +44,7 @@
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (isIOS) {
                 if (confirm("Would you like to copy the coupon code?")) {
-                    copyCode();
+                    clipboardFn();
                 }
             } else {
                 clipboardFn();
@@ -55,6 +55,7 @@
             navigator.clipboard
                 .readText()
                 .then((clipboardContent) => {
+                    console.log("inside the readtext - line 58")
                     if (clipboardContent === couponCode) {
                         document.getElementById("copyButton").style.display = "none";
                         document.getElementById("copiedMessage").style.display = "block";
