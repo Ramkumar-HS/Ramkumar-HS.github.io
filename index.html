@@ -38,7 +38,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const couponCodeEle = document.getElementById("couponCode")
-            couponCodeEle.value = `Default coupan code Virat${Math.floor(Math.random() * 1000)}`;
+            couponCodeEle.value = `Default coupon code Virat${Math.floor(Math.random() * 1000)}`;
             const couponCode = couponCodeEle.value;
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             navigator.clipboard
