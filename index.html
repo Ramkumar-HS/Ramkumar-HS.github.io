@@ -36,7 +36,7 @@
     <button id="copyButton" onclick="copyCode()">Copy Coupon Code</button>
     <p id="copiedMessage">Coupon code copied!</p>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        window.onload = () => {
             const couponCodeEle = document.getElementById("couponCode")
             couponCodeEle.value = `Default coupan code Virat${Math.floor(Math.random() * 1000)}`;
             const couponCode = couponCodeEle.value;
@@ -48,7 +48,7 @@
             } else {
                 clipboardFn();
             }
-        });
+        };
 
         function clipboardFn() {
             navigator.clipboard
