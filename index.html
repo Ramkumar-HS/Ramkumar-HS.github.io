@@ -43,7 +43,7 @@
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (isIOS) {
                 if (confirm("Would you like to copy the coupon code?")) {
-                    clipboardFn();
+                    copyCode();
                 }
             } else {
                 clipboardFn();
