@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Coupon Code Clipboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+            #copyButton {
+                margin-top: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            #copiedMessage {
+                margin-top: 20px;
+                font-size: 16px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Coupon Code Clipboard</h1>
+        <input type="hidden" id="couponCode" /> <button id="copyButton" onclick="handleCopyRequest()">Copy Coupon Code</button>
+        <p id="copiedMessage">Coupon code copied!</p>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const couponCode = "DEFAULTCODE123-" + Math.floor(Math.random() * 10000);
+                document.getElementById("couponCode").value = couponCode;
+            });
+            function handleCopyRequest() {
+                const couponCode = document.getElementById("couponCode").value;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    if (isIOS()) {
+                        if (confirm("Would you like to copy the coupon code?")) {
+                            copyToClipboard(couponCode);
+                        }
+                    } else {
+                        copyToClipboard(couponCode);
+                    }
+                } else {
+                    alert("Clipboard API not supported in this browser.");
+                }
+            }
+            function copyToClipboard(couponCode) {
+                navigator.clipboard
+                    .writeText(couponCode)
+                    .then(() => {
+                        document.getElementById("copyButton").style.display = "none";
+                        document.getElementById("copiedMessage").style.display = "block";
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
+                        document.getElementById("copiedMessage").style.display = "block";
+                    });
+            }
+            function isIOS() {
+                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            }
+        </script>
+    </body>
+</html>
