@@ -38,9 +38,19 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const couponCodeEle = document.getElementById("couponCode")
-            couponCodeEle.value = `Default coupon code Virat${Math.floor(Math.random() * 1000)}`;
+            couponCodeEle.value = `Default coupan code Virat${Math.floor(Math.random() * 1000)}`;
             const couponCode = couponCodeEle.value;
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIOS) {
+                if (confirm("Would you like to copy the coupon code?")) {
+                    clipboardFn();
+                }
+            } else {
+                clipboardFn();
+            }
+        });
+
+        function clipboardFn() {
             navigator.clipboard
                 .readText()
                 .then((clipboardContent) => {
@@ -48,29 +58,15 @@
                         document.getElementById("copyButton").style.display = "none";
                         document.getElementById("copiedMessage").style.display = "block";
                     } else {
-                        if (isIOS) {
-                            if (confirm("Would you like to copy the coupon code?")) {
-                                copyCode();
-                            }
-                        } else {
-                            navigator.clipboard
-                                .writeText(couponCode)
-                                .then(() => {
-                                    document.getElementById("copyButton").style.display = "none";
-                                    document.getElementById("copiedMessage").style.display = "block";
-                                })
-                                .catch(() => {
-                                    document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
-                                    document.getElementById("copiedMessage").style.display = "block";
-                                });
-                        }
+                        copyCode()
                     }
                 })
                 .catch(() => {
                     document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
                     document.getElementById("copiedMessage").style.display = "block";
                 });
-        });
+        }
+
         function copyCode() {
             const couponCode = document.getElementById("couponCode").value;
             navigator.clipboard
