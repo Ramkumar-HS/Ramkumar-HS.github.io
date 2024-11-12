@@ -31,12 +31,10 @@
 </head>
 
 <body>
-    <h1>Coupon Code Clipboard</h1>
+    <h1>Coupon Code Clipboard</h1><span id="copyButton">****</span>
     <input type="hidden" id="couponCode" value="Viratttttttttttttttttttttt18" />
-    //<button id="copyButton" onclick="copyCode()">Copy Coupon Code</button>
-    //<h3>Manual copy button for testing</h3>
     <button onclick="copyCode()">Manual copy button</button>
-    // <p id="copiedMessage">Coupon code copied!</p>
+    <p id="copiedMessage">Coupon code copied!</p>
     <script>
         // window.onload = () => {
         //     const couponCodeEle = document.getElementById("couponCode")
@@ -72,7 +70,7 @@
         // }
 
         function copyCode() {
-            const couponCode = document.getElementById("couponCode").value;
+            // const couponCode = document.getElementById("couponCode").value;
             setTimeout(()=>{
                 navigator.clipboard
                     .writeText(couponCode)
