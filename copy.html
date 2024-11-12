@@ -12,8 +12,8 @@
                 const textToCopy = document.getElementById("textToCopy").value;
                 if(navigator.clipboard && navigator.clipboard.writeText){
                     try {
-                        await navigator.clipboard.writeText(textToCopy);
-                        alert("Text copied to clipboard!");
+                        const ct = await navigator.clipboard.writeText(textToCopy);
+                        console.log(ct, "Text copied to clipboard!");
                     } catch (err) {
                         console.error("Failed to copy text using Clipboard API: ", err);
                         fallbackCopyText(textToCopy);
