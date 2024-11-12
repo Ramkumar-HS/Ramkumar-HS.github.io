@@ -10,11 +10,15 @@
         <script>
             async function copyToClipboard() {
                 const textToCopy = document.getElementById("textToCopy").value;
-                try {
-                    await navigator.clipboard.writeText(textToCopy);
-                    alert("Text copied to clipboard!");
-                } catch (err) {
-                    console.error("Failed to copy text using Clipboard API: ", err);
+                if(navigator.clipboard && navigator.clipboard.writeText){
+                    try {
+                        await navigator.clipboard.writeText(textToCopy);
+                        alert("Text copied to clipboard!");
+                    } catch (err) {
+                        console.error("Failed to copy text using Clipboard API: ", err);
+                        fallbackCopyText(textToCopy);
+                    }
+                } else {
                     fallbackCopyText(textToCopy);
                 }
             }
