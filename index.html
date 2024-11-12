@@ -32,44 +32,44 @@
 
 <body>
     <h1>Coupon Code Clipboard</h1>
-    <input type="hidden" id="couponCode" />
-    <button id="copyButton" onclick="copyCode()">Copy Coupon Code</button>
-    <h3>Manual copy button for testing</h3>
+    <input type="hidden" id="couponCode" value="Viratttttttttttttttttttttt18" />
+    //<button id="copyButton" onclick="copyCode()">Copy Coupon Code</button>
+    //<h3>Manual copy button for testing</h3>
     <button onclick="copyCode()">Manual copy button</button>
-    <p id="copiedMessage">Coupon code copied!</p>
+    // <p id="copiedMessage">Coupon code copied!</p>
     <script>
-        window.onload = () => {
-            const couponCodeEle = document.getElementById("couponCode")
-            couponCodeEle.value = `Default coupan code Virat${Math.floor(Math.random() * 1000)}`;
-            const couponCode = couponCodeEle.value;
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            if (isIOS) {
-                if (confirm("Would you like to copy the coupon code?")) {
-                    clipboardFn();
-                }
-            } else {
-                clipboardFn();
-            }
-        };
+        // window.onload = () => {
+        //     const couponCodeEle = document.getElementById("couponCode")
+        //     couponCodeEle.value = `Default coupan code Virat${Math.floor(Math.random() * 1000)}`;
+        //     const couponCode = couponCodeEle.value;
+        //     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        //     if (isIOS) {
+        //         if (confirm("Would you like to copy the coupon code?")) {
+        //             clipboardFn();
+        //         }
+        //     } else {
+        //         clipboardFn();
+        //     }
+        // };
 
-        function clipboardFn() {
-            navigator.clipboard
-                .readText()
-                .then((clipboardContent) => {
-                    console.log("inside the readtext - line 58")
-                    if (clipboardContent === couponCode) {
-                        document.getElementById("copyButton").style.display = "none";
-                        document.getElementById("copiedMessage").style.display = "block";
-                    } else {
-                        copyCode()
-                    }
-                })
-                .catch((err) => {
-                    console.log("Clipboard error line 65 -", err)
-                    document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
-                    document.getElementById("copiedMessage").style.display = "block";
-                });
-        }
+        // function clipboardFn() {
+        //     navigator.clipboard
+        //         .readText()
+        //         .then((clipboardContent) => {
+        //             console.log("inside the readtext - line 58")
+        //             if (clipboardContent === couponCode) {
+        //                 document.getElementById("copyButton").style.display = "none";
+        //                 document.getElementById("copiedMessage").style.display = "block";
+        //             } else {
+        //                 copyCode()
+        //             }
+        //         })
+        //         .catch((err) => {
+        //             console.log("Clipboard error line 65 -", err)
+        //             document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
+        //             document.getElementById("copiedMessage").style.display = "block";
+        //         });
+        // }
 
         function copyCode() {
             const couponCode = document.getElementById("couponCode").value;
