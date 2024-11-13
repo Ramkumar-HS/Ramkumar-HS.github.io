@@ -63,15 +63,35 @@
                         document.getElementById("copyButton").style.display = "none";
                         document.getElementById("copiedMessage").style.display = "block";
                     } else {
-                        fallbackCopyText(couponCode)
+                        copyCodeFn(couponCode)
                     }
                 })
                 .catch((err) => {
-                    console.log("Clipboard error line 65 -", err)
-                    fallbackCopyText(couponCode)
-                    document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
-                    document.getElementById("copiedMessage").style.display = "block";
+                    copyCodeFn(couponCode)
                 });
+        }
+        
+        
+        function copyCodeFn(event) {
+            const couponCode = document.getElementById("couponCode").value;
+            setTimeout(()=>{
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard
+                        .writeText(couponCode)
+                        .then(() => {
+                            document.getElementById("copyButton").style.display = "none";
+                            document.getElementById("copiedMessage").style.display = "block";
+                        })
+                        .catch((err) => {
+                            console.log("Clipboard error line 80 -", err)
+                            fallbackCopyText(couponCode);
+                            document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
+                            document.getElementById("copiedMessage").style.display = "block";
+                        });
+                } else {
+                    fallbackCopyText(couponCode);
+                }
+            }, 0);
         }
 
         function fallbackCopyText(text) {
