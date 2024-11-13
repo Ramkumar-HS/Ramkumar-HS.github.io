@@ -63,15 +63,30 @@
                         document.getElementById("copyButton").style.display = "none";
                         document.getElementById("copiedMessage").style.display = "block";
                     } else {
-                        copyCode()
+                        fallbackCopyText(couponCode)
                     }
                 })
                 .catch((err) => {
                     console.log("Clipboard error line 65 -", err)
+                    fallbackCopyText(couponCode)
                     document.getElementById("copiedMessage").textContent = "Could not read clipboard content.";
                     document.getElementById("copiedMessage").style.display = "block";
                 });
         }
+
+        function fallbackCopyText(text) {
+                const tempInput = document.createElement("input");
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand("copy");
+                    console.log("execCommand success");
+                } catch (err) {
+                    console.error("Fallback: Failed to copy text", err);
+                }
+                document.body.removeChild(tempInput);
+            }
 
     </script>
         
