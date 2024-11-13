@@ -89,11 +89,26 @@
                     })
                     .catch((err) => {
                         console.log("Clipboard error line 80 -", err)
+                        fallbackCopyText(couponCode);
                         document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
                         document.getElementById("copiedMessage").style.display = "block";
                     });
             }, 0);
         }
+
+        function fallbackCopyText(text) {
+                const tempInput = document.createElement("input");
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand("copy");
+                    console.log("execCommand success");
+                } catch (err) {
+                    console.error("Fallback: Failed to copy text", err);
+                }
+                document.body.removeChild(tempInput);
+            }
     </script>
 </body>
 
