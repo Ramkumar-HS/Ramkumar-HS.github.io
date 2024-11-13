@@ -35,6 +35,23 @@
     <input type="hidden" id="couponCode" value="Viratttttttttttttttttttttt18" />
     <button ontouchstart="copyCodeFn(event)" onclick="copyCodeFn(event)">Manual copy button</button>
     <p id="copiedMessage">Coupon code copied!</p>
+
+    <button class="copy-button456" data-clipboard-text="Text to copy ClipboardJS">Copy</button>
+    <script>
+        const clipboard = new ClipboardJS(".copy-button456");
+        clipboard.on("success", () => alert("Text copied to clipboard!"));
+        clipboard.on("error", () => alert("Failed to copy text."));
+    </script>
+    
+    <button id="copyButton123">Copy Text clipboardCopy</button>
+    <script>
+        document.getElementById("copyButton123").addEventListener("click", () => {
+            clipboardCopy("Text to copy")
+                .then(() => alert("Text copied to clipboard!"))
+                .catch(() => alert("Failed to copy text."));
+        });
+    </script>
+
     <script>
         // window.onload = () => {
         //     const couponCodeEle = document.getElementById("couponCode")
