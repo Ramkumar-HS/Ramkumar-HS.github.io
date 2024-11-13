@@ -68,10 +68,17 @@
         //             document.getElementById("copiedMessage").style.display = "block";
         //         });
         // }
-
-        function copyCode(event) {
-              if ("isTrusted" in event) {
-                if (event.isTrusted) { 
+        
+        function copyCode(event) { 
+            console.log("copy code fn =>", event)
+            if(confirm("Allow clipboard access")){
+                copyCodeFn();
+            } else { 
+                console.log("not confirmed", event)
+            }
+        }
+        
+        function copyCodeFn() {
             const couponCode = document.getElementById("couponCode").value;
             setTimeout(()=>{
                 navigator.clipboard
@@ -85,7 +92,7 @@
                         document.getElementById("copiedMessage").textContent = "Failed to copy the coupon code.";
                         document.getElementById("copiedMessage").style.display = "block";
                     });
-            }, 0);}}
+            }, 0);
         }
     </script>
 </body>
