@@ -10,19 +10,21 @@
         <script>
             function copyToClipboard() {
                 const textToCopy = document.getElementById("textToCopy").value;
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard
-                        .writeText(textToCopy)
-                        .then(() => {
-                            console.log("success");
-                        })
-                        .catch((err) => {
-                            console.error("Failed to copy text using Clipboard API: ", err);
-                            fallbackCopyText(textToCopy);
-                        });
-                } else {
-                    fallbackCopyText(textToCopy);
-                }
+                setTimeout(()=>{
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard
+                            .writeText(textToCopy)
+                            .then((st) => {
+                                console.log("success", st);
+                            })
+                            .catch((err) => {
+                                console.error("Failed to copy text using Clipboard API: ", err);
+                                fallbackCopyText(textToCopy);
+                            });
+                    } else {
+                        fallbackCopyText(textToCopy);
+                    }
+                },0)
             }
             function fallbackCopyText(text) {
                 const tempInput = document.createElement("input");
