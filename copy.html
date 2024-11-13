@@ -11,7 +11,7 @@
             function copyToClipboard() {
                 const textToCopy = document.getElementById("textToCopy").value;
                 setTimeout(()=>{
-                    if (!navigator.clipboard && navigator.clipboard.writeText) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard
                             .writeText(textToCopy)
                             .then((st) => {
