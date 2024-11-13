@@ -81,7 +81,7 @@
         function copyCodeFn(event) {
             const couponCode = document.getElementById("couponCode").value;
             setTimeout(()=>{
-                if (!navigator.clipboard && navigator.clipboard.writeText) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard
                         .writeText(couponCode)
                         .then(() => {
