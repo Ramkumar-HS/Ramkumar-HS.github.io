@@ -34,10 +34,12 @@
 <body>
     <h1>Coupon Code Clipboard <span id="copyButton">****</span></h1>
     <input type="hidden" id="couponCode" value="Viratttttttttttttttttttttt18" />
-    <button ontouchstart="copyCodeFn(event)" onclick="copyCodeFn(event)">Manual copy button</button>
+    <button onclick="copyCodeFn()">Copy Button - Native JS clipboard fn</button>
+    <br/>
     <p id="copiedMessage">Coupon code copied!</p>
+    <br/>
 
-    <button class="copy-button456" data-clipboard-text="Text to copy ClipboardJS">Copy</button>
+    <button class="copy-button456" data-clipboard-text="Text to copy ClipboardJS">Copy - ClipboardJS library</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard-copy@3.2.0/index.min.js"></script>
     <script>
@@ -46,10 +48,11 @@
         clipboard.on("error", () => alert("Failed to copy text."));
     </script>
     
-    <button id="copyButton123">Copy Text clipboardCopy</button>
+    <button id="copyButton123">Copy - clipboardCopy library</button>
+    <br/>
     <script>
         document.getElementById("copyButton123").addEventListener("click", () => {
-            clipboardCopy("Text to copy")
+            clipboardCopy("clipboardCopy library copy works !!!!!!!!!!1")
                 .then(() => alert("Text copied to clipboard!"))
                 .catch(() => alert("Failed to copy text."));
         });
@@ -105,6 +108,7 @@
                     navigator.clipboard
                         .writeText(couponCode)
                         .then(() => {
+                            console.log("worked with navigator.clipboard.writeText!!!!!!!!!");
                             document.getElementById("copyButton").style.display = "none";
                             document.getElementById("copiedMessage").style.display = "block";
                         })
