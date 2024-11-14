@@ -37,11 +37,14 @@
     <button onclick="copyCodeFn()">Copy Button - Native JS clipboard fn</button>
     <br/>
     <p id="copiedMessage">Coupon code copied!</p>
-    <br/>
+    <br><br>
 
     <button class="copy-button456" data-clipboard-text="Text to copy ClipboardJS">Copy - ClipboardJS library</button>
+    <br><br>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard-copy@3.2.0/index.min.js"></script>
+    
     <script>
         const clipboard = new ClipboardJS(".copy-button456");
         clipboard.on("success", () => alert("Text copied to clipboard!"));
@@ -49,7 +52,8 @@
     </script>
     
     <button id="copyButton123">Copy - clipboardCopy library</button>
-    <br/>
+    <br><br>
+
     <script>
         document.getElementById("copyButton123").addEventListener("click", () => {
             clipboardCopy("clipboardCopy library copy works !!!!!!!!!!1")
